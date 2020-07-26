@@ -11,6 +11,10 @@ app.use(express.json())
 
 
 
+// app.get('/test',async function (req,res) {
+//     return res.status(401).json({error:'query error!'});
+// })
+
 app.get('/getTransactionsAsDataBuyer',async function (req,res) {
     let address=req.body.address
     let results=await dbManager.getTransactionsAsDataBuyer(address,function(results)
@@ -20,6 +24,7 @@ app.get('/getTransactionsAsDataBuyer',async function (req,res) {
     function onfail()
     {
         console.error('query error!')
+        return res.status(401).json({error:'query error!'});
     })
 })
 
@@ -34,6 +39,7 @@ app.get('/getTransactionsAsDataOwner',async function (req,res) {
     function onfail()
     {
         console.error('query error!')
+        return res.status(401).json({error:'query error!'});
     })
 })
 
@@ -45,6 +51,7 @@ app.get('/getCalculators',async function (req,res) {
     function onfail()
     {
         console.error('query error!')
+        return res.status(401).json({error:'query error!'});
     })
 })
 
@@ -62,6 +69,7 @@ app.get('/getData',async function (req,res) {
     function onfail()
     {
         console.error('query error!')
+        return res.status(401).json({error:'query error!'});
     })
 })
 
