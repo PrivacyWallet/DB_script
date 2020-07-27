@@ -71,3 +71,41 @@ exports.addCalculator = async function(calculator)
             console.log('sucess add '+calculator)
       });
 }
+
+exports.getData = async function(id,onsuccess,onfail)
+{
+    let connection  =await connect_DB()
+    
+    await connection.query("SELECT * FROM getdata where id='"+id+"'", function (error, results, fields) {
+        if (error)
+            onfail(error)
+        else
+            onsuccess(results)
+      });
+
+      connection.end()
+}
+
+exports.setData = async function(data)
+{
+    let connection  =await connect_DB()
+    
+    sql='INSERT INTO getdata(id,price,epsilon,calculatorContract,address)VALUES('+
+        '"'+data.id+'",'+
+        data.price+','+
+        data.epsilon+','+
+        '"'+data.calculatorContract+'",'+
+        '"'+data.address+'")'
+
+    await connection.query(sql, function (error, results, fields) {
+        if (error)
+        {
+            console.log('insert error!')
+            throw error
+        }
+        else
+            console.log('sucess add '+data)
+      });
+
+    connection.end()
+}

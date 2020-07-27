@@ -31,8 +31,6 @@ app.get("/getTransactionsAsDataBuyer", async function (req, res) {
 });
 
 app.get("/getTransactionsAsDataOwner", async function (req, res) {
-  //这里需要确定查dataowner的时候传入的究竟是address还是dataBuyerContractAddress
-  console.log(req.query);
   let address = req.query.address;
   let results = await dbManager.getTransactionsAsDataOwner(
     address,
@@ -64,17 +62,31 @@ app.post("/addCalculator", async function (req, res) {
 });
 
 app.get("/getData", async function (req, res) {
-  let address = getAddress(req);
-  let results = await dbManager.getTransactionsAsDataBuyer(
-    address,
+  let id = req.query.id;
+  let results = await dbManager.getData(
+    id,
     function (results) {
       res.send(results);
     },
-    function onfail() {
+    function onfail(error) {
       console.error("query error!");
       return res.status(401).json({ error: "query error!" });
     }
   );
+});
+
+app.post("/setData", async function (req, res) {
+  let data={
+    id:req.body.id,
+    price:req.body.price,
+    epsilon:req.body.epsilon,
+    calculatorContract:req.body.calculatorContract,
+    address:req.body.address
+  }
+
+  console.log('get data'+data)
+
+  dbManager.setData(data)
 });
 
 const server = http.createServer(app);
