@@ -68,15 +68,15 @@ exports.addCalculator = async function(calculator)
         if (error) 
             throw error
         else
-            console.log('sucess add '+calculator)
+            console.log('sucess add ', calculator)
       });
 }
 
-exports.getData = async function(id,onsuccess,onfail)
+exports.getData = async function(address,onsuccess,onfail)
 {
     let connection  =await connect_DB()
     
-    await connection.query("SELECT * FROM getdata where id='"+id+"'", function (error, results, fields) {
+    await connection.query("SELECT * FROM getdata where address='"+address+"'", function (error, results, fields) {
         if (error)
             onfail(error)
         else
@@ -104,7 +104,7 @@ exports.setData = async function(data)
             throw error
         }
         else
-            console.log('sucess add '+data)
+            console.log('sucess add ', data)
       });
 
     connection.end()

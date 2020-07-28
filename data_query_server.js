@@ -62,9 +62,9 @@ app.post("/addCalculator", async function (req, res) {
 });
 
 app.get("/getData", async function (req, res) {
-  let id = req.query.id;
+  let address = req.query.address;
   let results = await dbManager.getData(
-    id,
+    address,
     function (results) {
       res.send(results);
     },
@@ -76,17 +76,17 @@ app.get("/getData", async function (req, res) {
 });
 
 app.post("/setData", async function (req, res) {
-  let data={
-    id:req.body.id,
-    price:req.body.price,
-    epsilon:req.body.epsilon,
-    calculatorContract:req.body.calculatorContract,
-    address:req.body.address
-  }
+  let data = {
+    id: req.body.id,
+    price: req.body.price,
+    epsilon: req.body.epsilon,
+    calculatorContract: req.body.calculatorContract,
+    address: req.body.address,
+  };
 
-  console.log('get data'+data)
+  console.log("get data" + data);
 
-  dbManager.setData(data)
+  dbManager.setData(data);
 });
 
 const server = http.createServer(app);
