@@ -12,10 +12,6 @@ app.use(cors());
 
 app.use(express.json());
 
-// app.get('/test',async function (req,res) {
-//     return res.status(401).json({error:'query error!'});
-// })
-
 app.get("/getTransactionsAsDataBuyer", async function (req, res) {
   let address = req.query.address;
   let results = await dbManager.getTransactionsAsDataBuyer(
