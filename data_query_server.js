@@ -54,7 +54,7 @@ app.get("/getCalculators", async function (req, res) {
 
 app.post("/addCalculator", async function (req, res) {
   let calculator = req.body.calculator;
-  await dbManager.addCalculator(address);
+  await dbManager.addCalculator(calculator);
 });
 
 app.get("/getData", async function (req, res) {
